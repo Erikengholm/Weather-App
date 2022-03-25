@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import Currentweather from "./Components/CurrentWeather";
+import React,{useRef} from  "react"
 
-function App() {
+class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      CityName: 'Stockholm'
+    };
+    this.myRef = React.createRef();
+
+  }
+  render() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      
+        <input type="text" ref={this.myRef} /> 
+        <button onClick={() => this.setState({ CityName: this.myRef.current.value })}>
+          Click me
+        </button>        
+        <Currentweather CityName={this.state.CityName} />
+      
+    </>
   );
+  }
 }
 
 export default App;
