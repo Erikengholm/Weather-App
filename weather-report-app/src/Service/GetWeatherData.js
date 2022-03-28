@@ -1,34 +1,24 @@
-import FakeJson from './FakeJson.json';
+import GeoLocationFromName from './GetLocationFromName';
 
-function CleanTheString(stringValue){
-    var separateWord = stringValue.toLowerCase().split(' ');
-    for (var i = 0; i < separateWord.length; i++) {
-       separateWord[i] = separateWord[i].charAt(0).toUpperCase() +
-       separateWord[i].substring(1);
-    }
-    String(separateWord).trim();
-    return separateWord.join(' ');
-}
+const WeatherData = async (cityName) =>{
+    let JsonData;
 
-const WeatherData = (cityName) =>{
+    const response = await GeoLocationFromName(cityName)
+    await fetch(
+            "https://api.openweathermap.org/data/2.5/onecall?"+response+"&exclude=hourly,minutely,alerts&appid=92526e142060bc0fdeddb4e5094317b5&units=metric")
+                        .then((res) => res.json())
+                        .then((json) => {
+                            JsonData =json
 
-    var NewCityName = CleanTheString(cityName);
-    
-    var queryCityName = String(NewCityName).replaceAll(" ","%20")
-   /* fetch(
-        "http://api.weatherstack.com/forecast?access_key=1884efe38282eb37704ac76a8810e5db&query=Stockholm&forecast_days=6&hourly=0)
-                    .then((res) => res.json())
-                    .then((json) => {
-                        this.setState({
-                            items: json,
-                            DataisLoaded: true
-                        });
-                    })
-            }*/
-            
-    return FakeJson;
+        })
+    alert(JsonData.timezone)
+    return JsonData
 
+     
 }
 
 
 export default WeatherData;
+
+/**
+ */

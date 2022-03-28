@@ -8,7 +8,7 @@ const currentWeatherDiv = (props) =>{
     var today = new Date();
 
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-
+    let imageUrl = "http://openweathermap.org/img/wn/"+props.image+"@2x.png"
     return (
         <div className="CurrentWeatherDiv">
 
@@ -16,7 +16,7 @@ const currentWeatherDiv = (props) =>{
         {props.CityName}
         </h1>
         <div>
-
+        <img src={imageUrl} alt={props.desc} />
         <p>{props.desc}</p>
         </div>
         <p>
