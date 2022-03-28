@@ -1,30 +1,31 @@
 import React from "react"
-import cloudy from "../Images/cloudy.png"
 import GetWeatherData from "../Service/GetWeatherData"
+import TimeBox from "./TimeBox"
+import '../Styles/WeatherStyles.css';
 
 const currentWeatherDiv = (props) =>{
 
-    var img;
-    var alt;
-    GetWeatherData(props.CityName)
-   /* switch(props.WeatherImage){
+    var today = new Date();
 
-        case "sunny":
-            img = cloudy;
-            alt = "Overcast"
-        break;
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
-        default:
-            alt = "???"
+    return (
+        <div className="CurrentWeatherDiv">
 
-
-    }*/
-
-    return (<div>
         <h1>
-            {props.CityName}
+        {props.CityName}
         </h1>
-    </div>)
+        <div>
+
+        <p>{props.desc}</p>
+        </div>
+        <p>
+            {props.temp}°C
+        </p>
+        <p>{date}</p>
+        <TimeBox/>
+
+        </div>)
 
 }
 

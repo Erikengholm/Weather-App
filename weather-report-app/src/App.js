@@ -1,5 +1,9 @@
 import Currentweather from "./Components/CurrentWeather";
-import React,{useRef} from  "react"
+import WeatherBody from "./Components/WeatherBody";
+
+import React from  "react"
+import './App.css';
+
 
 class App extends React.Component {
 
@@ -13,15 +17,15 @@ class App extends React.Component {
   }
   render() {
   return (
-    <>
+    <div className="App">
       
         <input type="text" ref={this.myRef} /> 
         <button onClick={() => this.setState({ CityName: this.myRef.current.value })}>
           Click me
         </button>        
-        <Currentweather CityName={this.state.CityName} />
+        <WeatherBody CityName={this.state.CityName} />
       
-    </>
+    </div>
   );
   }
 }

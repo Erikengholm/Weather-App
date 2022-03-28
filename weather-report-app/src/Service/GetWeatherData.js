@@ -13,10 +13,10 @@ function CleanTheString(stringValue){
 const WeatherData = (cityName) =>{
 
     var NewCityName = CleanTheString(cityName);
-
+    
     var queryCityName = String(NewCityName).replaceAll(" ","%20")
    /* fetch(
-        "http://api.weatherstack.com/current?access_key=1884efe38282eb37704ac76a8810e5db&query="+queryCityName)
+        "http://api.weatherstack.com/forecast?access_key=1884efe38282eb37704ac76a8810e5db&query=Stockholm&forecast_days=6&hourly=0)
                     .then((res) => res.json())
                     .then((json) => {
                         this.setState({
@@ -26,8 +26,6 @@ const WeatherData = (cityName) =>{
                     })
             }*/
             
-
-    alert(queryCityName)
     return FakeJson;
 
 }
