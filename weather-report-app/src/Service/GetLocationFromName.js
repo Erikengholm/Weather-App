@@ -14,14 +14,27 @@ const GeoLocationFromName = async (cityName) =>{
     let values;
 
     var queryCityName = String(NewCityName).replaceAll(" ","%20")
+    return new Promise(function(resolve, reject) {
 
-    await fetch("https://api.openweathermap.org/geo/1.0/direct?q="+queryCityName+"&limit=1&appid=92526e142060bc0fdeddb4e5094317b5")
+    if(cityName !==""){
+         fetch("https://api.openweathermap.org/geo/1.0/direct?q="+queryCityName+"&limit=1&appid=92526e142060bc0fdeddb4e5094317b5")
                     .then((res) => res.json())
                     .then((json) => {
                         values = "lat="+json[0].lat+"&lon="+json[0].lon;
+                        resolve(values)
                     })
-    return values
-}
-
-
+    }
+    else{
+        if (navigator.geolocation) {
+         navigator.geolocation.getCurrentPosition((result)=>{
+                var crd = result.coords;
+                values = "lat="+crd.latitude+"&lon="+crd.longitude;
+                resolve(values)
+            });
+          } 
+    }
+})}
 export default GeoLocationFromName;
+
+
+

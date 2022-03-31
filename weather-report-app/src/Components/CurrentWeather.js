@@ -1,5 +1,4 @@
 import React from "react"
-import GetWeatherData from "../Service/GetWeatherData"
 import TimeBox from "./TimeBox"
 import '../Styles/WeatherStyles.css';
 

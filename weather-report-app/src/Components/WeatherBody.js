@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import GetWeatherData from "../Service/GetWeatherData"
 import '../Styles/WeatherStyles.css';
 import CurrentWeatherDiv from "./CurrentWeather";
-import ForeCastList from "./CurrentWeather";
+import ForeCastList from "./ForecastList";
 
 class WeatherBody extends React.Component {
    
@@ -17,22 +17,10 @@ class WeatherBody extends React.Component {
         };
     }
    
-    // ComponentDidMount is used to
-    // execute the code 
-    /*
-    .then((res) => res.json())
-            .then((json) => {
-                alert(json.timezone)
-
-                this.setState({
-                    items: json,
-                    DataisLoaded: true
-                });
-            }) */
     async componentDidMount() {
-       const response = await GetWeatherData(this.state.CityName)
-        this.setState({ items: response,DataisLoaded:true });
-            
+        GetWeatherData(this.state.CityName).then(json =>{
+            this.setState({ items: json,DataisLoaded:true })
+        })
     }
     render() {
         const { DataisLoaded, items } = this.state;
@@ -46,7 +34,7 @@ class WeatherBody extends React.Component {
     </div>
 
     <div>
-
+        <ForeCastList Forecast={items.daily} />
     </div>
     </>)
 
