@@ -1,40 +1,38 @@
 import WeatherBody from "./Components/WeatherBody";
 import AddCookie from "./Service/CreateCookiesService"
 import FavoritesPlaces from "./Components/FavoritesPlaces"
-import React from  "react"
+import React,{useState,useRef} from  "react"
 import './App.css';
 
 
-class App extends React.Component {
+const App = () => {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      CityName: ""
-      
-    };
-    this.cityNameRef = React.createRef();
-    this.ListToNameRef = this.ListToNameRef.bind(this);
+  
+    const cityNameRef = useRef();
 
+    const[CityName,SetCityName] = useState("");
 
-  }
-  ListToNameRef(input) {
-    this.setState({ CityName: input})
-    this.cityNameRef.current.value = input
-}
-  render() {
+    const[updateValue,UpdateValue] = useState(true);
+
+    const ListToNameRef = (input) => {
+      SetCityName(input)
+      this.cityNameRef.current.value = input
+    }
   return (
     <div className="App">
-        <FavoritesPlaces key={this.ListToNameRef} setRef={this.ListToNameRef}/>
-        <button onClick={ () =>AddCookie(this.cityNameRef.current.value)}>&#11088;</button>
-        <input type="text" ref={this.cityNameRef} /> 
-        <button onClick={() => this.setState({ CityName: this.cityNameRef.current.value })}>
+        <FavoritesPlaces key={updateValue} setRef={ListToNameRef}/>
+        <button onClick={ () =>{
+            AddCookie(cityNameRef.current.value)
+            UpdateValue(!updateValue)
+        }
+          }>&#11088;</button>
+        <input type="text" ref={cityNameRef} /> 
+        <button onClick={() => SetCityName(cityNameRef.current.value)}>
           Sök för ny stad
         </button>        
-        <WeatherBody key={this.state.CityName} CityName={this.state.CityName} />
+        <WeatherBody key={CityName} CityName={CityName} />
     </div>
   );
-  }
 }
 
 export default App;

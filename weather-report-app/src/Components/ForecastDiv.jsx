@@ -4,7 +4,7 @@ import '../Styles/WeatherStyles.css';
 const ForecastDiv = (props) =>{
 
 
-    return (<div key={props.IDKey} className="ForecastDivCss" >
+    return (<div key={props.minTemp} className="ForecastDivCss" >
     <p>{props.dates}</p>
     <img src={props.Image} alt={props.desc} />
     <p>Min temp:{props.minTemp}°C</p>

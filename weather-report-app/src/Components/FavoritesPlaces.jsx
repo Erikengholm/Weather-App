@@ -12,7 +12,7 @@ const FavoritesPlaces = ({ setRef }) =>{
 
     const list = arrayCookies.map(listItem => {
 
-        return(<li className="FavoritesList" onClick={() =>{setRef(listItem)}}>{listItem}</li>)
+        return(<li key={listItem} className="FavoritesList" onClick={() =>{setRef(listItem)}}>{listItem}</li>)
 
     });
 
